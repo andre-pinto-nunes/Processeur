@@ -42,17 +42,17 @@ begin
 		WrEn   <= '1';
 		Addr   <= "000100";
 		DataIn <= "00000000000000000000000000001010";
-		wait for 10 ns;		-- must be 10 in addr 8
+		wait for 10 ns;		-- must be 10 in addr 4
 
 		WrEn   <= '1';
 		Addr   <= "000101";
 		DataIn <= "00000000000000000000000000000001";
-		wait for 10 ns;		-- must be 10 in addr 8
+		wait for 10 ns;		-- must be 1 in addr 5
 
 		WrEn   <= '1';
 		Addr   <= "111111";
 		DataIn <= "11111111111111111111111111111111";
-		wait for 10 ns;		-- must be 111...111 in addr 111111
+		wait for 10 ns;		-- must be 111...111 in addr 63
 
 
 		wait;

@@ -30,15 +30,16 @@ signal Banc : table:=init_banc;
 
 begin
 
-DataOut <= Banc(to_integer(unsigned(Addr)));
+DataOut <= Banc(to_integer(unsigned(Addr))) when to_integer(unsigned(Addr)) >= 0 and to_integer(unsigned(Addr)) <= 63 else
+		   (others => '-');
 
-lecture : process( WrEn, Addr, CLK, DataIn )
+lecture : process(CLK)
 begin
-	if (WrEn = '1' and Rising_edge(CLK)) then
-		Banc(to_integer(unsigned(Addr))) <= DataIn;
-	else
-		Banc(to_integer(unsigned(Addr))) <= Banc(to_integer(unsigned(Addr)));
-	end if;
+	if Rising_edge(CLK) then
+		if WrEn = '1' then
+			Banc(to_integer(unsigned(Addr))) <= DataIn;
+		end if ;
+	end if ;
 end process ; -- lecture
 
 end architecture behavioural;
