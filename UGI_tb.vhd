@@ -27,6 +27,11 @@ begin
 	sig_gen: process
 	begin
 
+		rst <= '1';
+		nPCsel <= '0';
+		offset <= (others => '0');
+		wait for 10 ns;
+
 		rst <= '0';
 		nPCsel <= '0';
 		offset <= (others => '0');
@@ -38,8 +43,23 @@ begin
 		wait for 10 ns;
 
 		rst <= '0';
+		nPCsel <= '0';
+		offset <= (others => '0');
+		wait for 10 ns;
+
+		rst <= '0';
 		nPCsel <= '1';
 		offset <= X"000023";
+		wait for 10 ns;
+
+		rst <= '0';
+		nPCsel <= '0';
+		offset <= (others => '0');
+		wait for 10 ns;
+
+		rst <= '0';
+		nPCsel <= '1';
+		offset <= "111111111111111111110101"; -- offset = -11
 		wait for 10 ns;
 
 		rst <= '0';
