@@ -4,11 +4,11 @@ use IEEE.numeric_std.all;
 
 entity EXT is
 	generic(
-		N : positive range 1 to 31
+		N : positive range 1 to 32
 	);
 
     port (
-        E : IN  std_logic_vector(N downto 0);
+        E : IN  std_logic_vector(N-1 downto 0);
         S : OUT std_logic_vector(31 downto 0)
     );
 end entity EXT;
@@ -21,12 +21,12 @@ begin
 
 	if (to_integer(signed(E)) < 0) then
 		S <= (others => '1');
-		for i in 0 to N loop
+		for i in 0 to N-1 loop
 			S(i) <= E(i);
 		end loop ;
 	else
 		S <= (others => '0');
-		for i in 0 to N loop
+		for i in 0 to N-1 loop
 			S(i) <= E(i);
 		end loop ;
 	end if;

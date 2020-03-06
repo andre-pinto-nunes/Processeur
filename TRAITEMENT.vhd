@@ -28,7 +28,7 @@ begin
 									a => busA,
 									b => busB);
 
-	signext : entity work.ext 	generic map(7)
+	signext : entity work.ext 	generic map(8)
 								port map(E => imm,
 										 S => extOut);
 
