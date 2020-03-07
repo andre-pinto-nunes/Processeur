@@ -41,7 +41,7 @@ begin
 	--									 S => PCin);
 
 	PCin <= std_logic_vector(unsigned(PcOut)+1) when nPCsel = '0' else
-		  std_logic_vector(unsigned(PcOut)+1+unsigned(extOffset)) when nPCsel = '0' else
+		  std_logic_vector(unsigned(PcOut)+unsigned(extOffset)) when nPCsel = '0' else
 		  (others => '-');
 
 end architecture ;
