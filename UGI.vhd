@@ -16,7 +16,7 @@ architecture struct of UGI is
 
 begin
 
-	instructionMem : entity work.MEM port map(CLK => '0',
+	instructionMem : entity work.MEM(instructions) port map(CLK => '0',
 									          WrEn => '0',
 									          Addr => PcOut(5 downto 0),
 									          DataIn => (others => '0'),
@@ -41,7 +41,7 @@ begin
 	--									 S => PCin);
 
 	PCin <= std_logic_vector(unsigned(PcOut)+1) when nPCsel = '0' else
-		  std_logic_vector(unsigned(PcOut)+unsigned(extOffset)) when nPCsel = '0' else
+		  std_logic_vector(unsigned(PcOut)+unsigned(extOffset)) when nPCsel = '1' else
 		  (others => '-');
 
 end architecture ;

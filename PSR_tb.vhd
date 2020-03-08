@@ -5,14 +5,13 @@ use ieee.numeric_std.all;
 
 -----------------------------------------------------------
 
-entity REGCOMTEST is
+entity PSRTEST is
 end entity ;
 
 -----------------------------------------------------------
 
-architecture testbench of REGCOMTEST is
+architecture testbench of PSRTEST is
 
-constant C_CLK_PERIOD : real := 10.0e-9; -- NS
 SIGNAL RST     : std_logic;
 SIGNAL CLK     : std_logic;
 SIGNAL WE      : std_logic;
@@ -42,6 +41,7 @@ begin
 	begin
 		RST <= '1';
 		WE  <= '0';
+		DATAIN <= "00000000000000000000000000000000";
 		wait for 10 ns;
 
 		RST <= '0';
@@ -75,6 +75,6 @@ begin
 	-- Entity Under Test
 	-----------------------------------------------------------
 
-	RGCM : entity work.REGCOM(behavioural) port map (DATAIN, RST, CLK, WE, DATAOUT);
+	PSR : entity work.PSR(behavioural) port map (DATAIN, RST, CLK, WE, DATAOUT);
 
 end architecture testbench;

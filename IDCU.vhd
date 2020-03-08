@@ -31,41 +31,76 @@ begin
         --assignation par defaut
         instr_cour <= MOV;
 
-        --MOV
-        if instr(24 downto 21) = "1101" then    --OPCODE for MOV
-            instr_cour <= MOV;
+        if    (instr(27 downto 26) = "00") then  -- ADD, MOV, CMP
 
-        --ADDi/ADDr
-        elsif instr(24 downto 21) = "0100" then --OPCODE for ADD
-            --immediate selection
-            if instr(25) = '1' then
-                instr_cour <= ADDi;             --ADDi
-            elsif instr(25) = '0' then
-                instr_cour <= ADDr;             --ADDR
-            end if ;
+            if instr(24 downto 21) = "1101" then     -- MOV
+                instr_cour <= MOV;
 
-        --CMP
-        elsif instr(24 downto 21) = "1010" then --OPCODE for CMP
-            instr_cour <= CMP;
+            elsif instr(24 downto 21) = "0100" then -- ADD
 
-        --LDR/STR
-        elsif instr(24 downto 21) = "0000" then --PUBW : load/store memory
+                --immediate selection
+                if instr(25) = '1' then
+                    instr_cour <= ADDi;              -- ADDi
+                elsif instr(25) = '0' then
+                    instr_cour <= ADDr;              -- ADDR
+                end if ;
+
+            --CMP
+            elsif instr(24 downto 21) = "1010" then  -- CMP
+                instr_cour <= CMP;
+            end if;
+
+        elsif (instr(27 downto 26) = "01") then  -- LDR, STR
             --load or store
             if instr(20) = '1' then
-                instr_cour <= LDR;              --LDR
+                instr_cour <= LDR;                   --LDR
             elsif instr(20) = '0' then
-                instr_cour <= STR;              --STR
+                instr_cour <= STR;                   --STR
             end if ;
-        
-        --BAL/BLT
-        elsif instr(27 downto 25) = "101" then --branch
+        elsif (instr(27 downto 26) = "10") then        -- BLT, B
             --branch always or if less than
-            if instr(31 downto 28) = "1110" then --condition field to always
+            if instr(31 downto 28) = "1110" then     -- condition field to always
                 instr_cour <= BAL;
             elsif instr(31 downto 28) = "1011" then
                 instr_cour <= BLT;
             end if ;
-        end if ;
+        end if;
+
+        ----MOV
+        --if instr(24 downto 21) = "1101" then    --OPCODE for MOV
+        --    instr_cour <= MOV;
+
+        ----ADDi/ADDr
+        --elsif instr(24 downto 21) = "0100" then --OPCODE for ADD
+        --    --immediate selection
+        --    if instr(25) = '1' then
+        --        instr_cour <= ADDi;             --ADDi
+        --    elsif instr(25) = '0' then
+        --        instr_cour <= ADDr;             --ADDR
+        --    end if ;
+
+        ----CMP
+        --elsif instr(24 downto 21) = "1010" then --OPCODE for CMP
+        --    instr_cour <= CMP;
+
+        ----LDR/STR
+        --elsif instr(24 downto 21) = "0000" then --PUBW : load/store memory
+        --    --load or store
+        --    if instr(20) = '1' then
+        --        instr_cour <= LDR;              --LDR
+        --    elsif instr(20) = '0' then
+        --        instr_cour <= STR;              --STR
+        --    end if ;
+        
+        ----BAL/BLT
+        --elsif instr(27 downto 25) = "101" then --branch
+        --    --branch always or if less than
+        --    if instr(31 downto 28) = "1110" then --condition field to always
+        --        instr_cour <= BAL;
+        --    elsif instr(31 downto 28) = "1011" then
+        --        instr_cour <= BLT;
+        --    end if ;
+        --end if ;
     end process ; -- defInstrCour
 
     --controller unit
