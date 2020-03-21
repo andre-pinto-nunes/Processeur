@@ -25,6 +25,7 @@ signal instr_cour : enum_instruction;
 
 begin
 
+    --decodeur d'instruction
     defInstrCour : process( instr )
     begin
         --assignation par defaut
@@ -71,7 +72,7 @@ begin
 
     end process ; -- defInstrCour
 
-    --controller unit
+    --unite de controle
     commandGen : process( instr_cour, PSR )
     begin
         nPCsel <= '-';
