@@ -18,7 +18,7 @@ entity AUT is
     );
 end entity AUT;
 
-architecture behavioural of AUT is
+architecture structurel of AUT is
 
 SIGNAL BusA    : std_logic_vector(31 downto 0);
 SIGNAL BusB    : std_logic_vector(31 downto 0);
@@ -42,4 +42,4 @@ begin
 
     MUX2       : entity work.MUX2(behavioural)     generic map(32) port map( ALUout, DataOut, COM2, BusW );
 
-end architecture behavioural;
+end architecture structurel;

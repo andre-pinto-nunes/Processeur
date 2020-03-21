@@ -16,11 +16,12 @@ architecture behavioural of PSR is
 SIGNAL MEM : std_logic_vector(31 downto 0);
 
 begin
+    
+DATAOUT <= MEM;
 
 process( CLK, RST )
 begin
     if (RST = '1') then
-        DATAOUT <= X"00000000";
         MEM <= X"00000000";
     else
         if (rising_edge(CLK)) then
@@ -30,9 +31,7 @@ begin
                 MEM <= MEM;
             end if;
         end if;
-
-        DATAOUT <= MEM;
-
     end if;
 end process ;
+
 end architecture behavioural;

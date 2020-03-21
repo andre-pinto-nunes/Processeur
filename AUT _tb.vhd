@@ -20,7 +20,7 @@ SIGNAL Imm   : std_logic_vector(7 downto 0);
 
 
 begin
-	AUT  : entity work.AUT(behavioural) port map( CLK, RST, COM1, COM2, WrEn, RegWr , Rw, Ra, Rb, OP, Imm);
+	AUT  : entity work.AUT(structurel) port map( CLK, RST, COM1, COM2, WrEn, RegWr , Rw, Ra, Rb, OP, Imm);
 
 	ClOk: process
 	begin

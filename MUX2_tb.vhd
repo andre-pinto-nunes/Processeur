@@ -46,6 +46,6 @@ begin
 
 	end process ; -- test
 
-	MUX2: entity work.MUX2(behavioural) generic map (31) port map (A, B, COM, S);
+	MUX2: entity work.MUX2(behavioural) generic map (32) port map (A, B, COM, S);
 
 end architecture test_bench;

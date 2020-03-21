@@ -29,6 +29,6 @@ begin
 
 	end process ; -- test
 
-	EXT: entity work.EXT(behavioural) generic map (15) port map (E, S);
+	EXT: entity work.EXT(behavioural) generic map (16) port map (E, S);
 
 end architecture test_bench;

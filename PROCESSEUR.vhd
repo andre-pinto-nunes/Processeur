@@ -15,7 +15,7 @@ SIGNAL nPCsel             : std_logic;
 SIGNAL Rb                 : std_logic_vector(  3 downto 0 );
 SIGNAL Instruction        : std_logic_vector( 31 downto 0 );
 
-SIGNAL Rs                 : std_logic_vector(  3 downto 0 );
+SIGNAL Rn                 : std_logic_vector(  3 downto 0 );
 SIGNAL Rm		          : std_logic_vector(  3 downto 0 );
 SIGNAL Rd		          : std_logic_vector(  3 downto 0 );
 SIGNAL Imm		          : std_logic_vector(  7 downto 0 );
@@ -36,7 +36,7 @@ SIGNAL PSRout             : std_logic_vector( 31 downto 0 );
 begin
 
 
-	Rs                    <= Instruction( 19 downto 16 );
+	Rn                    <= Instruction( 19 downto 16 );
 	Rd                    <= Instruction( 15 downto 12 );
 	Rm                    <= Instruction(  3 downto  0 );
 	Imm                   <= Instruction(  7 downto  0 );
@@ -48,7 +48,7 @@ begin
 	with RegSel select Rb <= Rm when '0', Rd when '1', 	(others => '-') when others;
 	
 	UGI : entity work.UGI    port map( CLK, RST, nPCsel, Offset,                                                          Instruction);
-	AUT : entity work.AUT    port map( CLK, RST, ALUSrc, WrSrc, MemWr, RegWr, Rd, Rs, Rb, ALUctr, Imm,                           flag);
+	AUT : entity work.AUT    port map( CLK, RST, ALUSrc, WrSrc, MemWr, RegWr, Rd, Rn, Rb, ALUctr, Imm,                           flag);
 	PSR : entity work.PSR    port map( PSRin, RST, CLK, PSREn,                                                                 PSRout);
 	EXT : entity work.EXT    generic map(1) port map( VEC_flag,                                                                 PSRin);
 	IDC : entity work.IDCU   port map( PSRout, Instruction,                nPCsel, RegWr, RegSel, ALUSrc, ALUctr, PSREn, MemWr, WrSrc);

@@ -68,13 +68,13 @@ begin
 		-- TEST LDR : LDR R0, 0(R1)
 
 		PSR    <= (others => '0');
-		INSTR  <= B"1110_00_1_0100_0_0001_0001_0000_00000001"; --cond_01_imm_PUBW_load/store_RN_RD_rot_IMM
+		INSTR  <= B"1110_01_1_0100_1_0001_0001_0000_00000001"; --cond_01_imm_PUBW_load/store_RN_RD_rot_IMM
 		wait for 10 ns;
 
 		-- TEST STR : STR R2; 0(R1)
 
 		PSR    <= (others => '0');
-		INSTR  <= X"FFF55555"; --cond_01_imm_PUBW_load/store_RN_RD_rot_IMM
+		INSTR  <= B"1110_01_1_0100_0_0001_0001_0000_00000001"; --cond_01_imm_PUBW_load/store_RN_RD_rot_IMM
 		wait for 10 ns;
 
 		-- TEST BAL : BAL main (offset -8 => BAL #-8)
